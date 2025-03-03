@@ -57,6 +57,16 @@ class Test_Function_GetValidIntergerFuncion(unittest.TestCase):
         self.assertEqual(result, 10)
         mock_print.assert_any_call("Invalid input! Please provide a valid integer.")
 
+    
+    @patch('builtins.input', side_effect=[''])
+    @patch('builtins.print')  
+    def test_no_input(self, mock_print, mock_input):
+        with self.assertRaises(SystemExit) as exc:
+            get_valid_integer()
+        self.assertEqual(exc.exception.code, 1)
+        mock_print.assert_any_call("Error: No input argument provided.\nUsage: python script.py <decimal_number>")
+
+
 
 if __name__ == '__main__':
     unittest.main()
