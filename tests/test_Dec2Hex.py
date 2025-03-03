@@ -50,6 +50,15 @@ class Test_Function_GetValidIntergerFuncion(unittest.TestCase):
         result = get_valid_integer()
         self.assertEqual(result, 0)  
 
+    @patch('builtins.input', side_effect=['c', '*', '10'])
+    @patch('builtins.print')
+    def test_invalid_then_valid_input(self, mock_print, mock_input):
+        result = get_valid_integer()
+        self.assertEqual(result, 10)
+        mock_print.assert_any_call("Invalid input! Please provide a valid integer.")
+
+
 if __name__ == '__main__':
     unittest.main()
+
 
