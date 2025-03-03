@@ -20,18 +20,24 @@ class Test_function_DecimalToHex(unittest.TestCase):
         self.assertEqual(decimal_to_hex(0), "0")
 
 class Test_Main(unittest.TestCase):
-
-    def test_input_no_argument(self): 
+    
+    def test_input_no_argument(self):
         result = subprocess.run(
             [sys.executable, "src/Dec2Hex.py"],  
             capture_output=True,
             text=True
         )
-        expected_message = "Error: No input argument provided.\nUsage: python script.py <decimal_number>"
-        self.assertTrue(
-            expected_message in result.stderr or expected_message in result.stdout,
-            f"Expected '{expected_message}' but got '{result.stderr}'"
+        expected_message = "Error: No input argument provided.\nUsage: python script.py <decimal_number>\n"
+        self.assertEqual(result.stdout, expected_message)
+    
+    def test_valid_integer_argument(self):
+        result = subprocess.run(
+            [sys.executable, "src/Dec2Hex.py", "10"],  
+            capture_output=True,
+            text=True
         )
+        expected_output = "Converting the Decimal Value 10 to Hex...\nHexadecimal representation is: A\n"  
+        self.assertEqual(result.stdout, expected_output)
 
 class Test_Function_GetValidIntergerFuncion(unittest.TestCase):
     
@@ -65,8 +71,6 @@ class Test_Function_GetValidIntergerFuncion(unittest.TestCase):
             get_valid_integer()
         self.assertEqual(exc.exception.code, 1)
         mock_print.assert_any_call("Error: No input argument provided.\nUsage: python script.py <decimal_number>")
-
-
 
 if __name__ == '__main__':
     unittest.main()
