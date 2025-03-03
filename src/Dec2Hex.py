@@ -40,7 +40,7 @@ def get_valid_integer():
             except ValueError:
                 print("Invalid input! Please provide a valid integer.")    
 
-if __name__ == "__main__":
+def main():
     if len(sys.argv) > 1: 
         try:
             decimal_value = int(sys.argv[1])
@@ -52,3 +52,5 @@ if __name__ == "__main__":
     else: # Return error for no input argument
         print("Error: No input argument provided.\nUsage: python script.py <decimal_number>")
 
+if __name__ == "__main__":
+   main()
