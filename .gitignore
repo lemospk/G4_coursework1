@@ -1,0 +1,4 @@
+__pycache__/	
+htmlcov/, .coverage, coverage.xml	
+convert_coverage.py
+sonar-project.properties

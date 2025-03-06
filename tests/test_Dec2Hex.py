@@ -1,10 +1,11 @@
+import subprocess
 import sys, os, unittest
 from unittest.mock import patch
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
-from Dec2Hex import decimal_to_hex, get_valid_integer, main
+from Dec2Hex import decimal_to_hex, get_valid_integer
 
 
-class Tests_Dec2Hex(unittest.TestCase):
+class Test_Dec2Hex(unittest.TestCase):
 
     def test_decimal_to_hex_integer_input(self):
         self.assertEqual(decimal_to_hex(10), "A")
