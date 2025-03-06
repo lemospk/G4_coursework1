@@ -6,6 +6,7 @@ def decimal_to_hex(decimal_value):
     num = abs(decimal_value)
 
     if(decimal_value < 0):
+        # Add negative sign to print if the input is negative
         print(f"Converting the Decimal Value -{num} to Hex...")
     else:
         print(f"Converting the Decimal Value {num} to Hex...")
@@ -18,7 +19,7 @@ def decimal_to_hex(decimal_value):
             hexadecimal = hex_chars[rem] + hexadecimal
             num //= 16
 
-    if decimal_value < 0:  # Add negative sign back if the input was negative
+    if decimal_value < 0:  # Add negative sign if the input is negative
         hexadecimal = "-" + hexadecimal
 
     if decimal_value == 0: 
@@ -40,7 +41,6 @@ def get_valid_integer():
             except ValueError:
                 print("Invalid input! Please provide a valid integer.")    
 
-
 if __name__ == "__main__":
     if len(sys.argv) > 1: 
         try:
@@ -52,4 +52,5 @@ if __name__ == "__main__":
             decimal_to_hex(decimal_value)
     else:
         # Return error for no input argument
-        raise ValueError("Error: No input argument provided.\nUsage: python script.py <decimal_number>")
+        print("Error: No input argument provided.\nUsage: python script.py <decimal_number>")
+        sys.exit(1)
