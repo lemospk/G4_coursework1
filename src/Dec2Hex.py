@@ -41,19 +41,15 @@ def get_valid_integer():
                 print("Invalid input! Please provide a valid integer.")    
 
 
-def main():
-    # Provide return of error for no input      
-    if len(sys.argv) != 2:
+if __name__ == "__main__":
+    if len(sys.argv) > 1: 
+        try:
+            decimal_value = int(sys.argv[1])
+            decimal_to_hex(decimal_value)
+        except ValueError:
+            # Provide error handling for non-integer inputs      
+            decimal_value = get_valid_integer()
+            decimal_to_hex(decimal_value)
+    else:
+        # Return error for no input argument
         raise ValueError("Error: No input argument provided.\nUsage: python script.py <decimal_number>")
-    result = None 
-    try:
-        decimal_value = int(sys.argv[1])
-        result = decimal_to_hex(decimal_value)
-    except ValueError:
-        # Provide error handling for non-integer inputs      
-        decimal_value = get_valid_integer()
-        decimal_to_hex(decimal_value)
-        return result
-
-if __name__ == "__main__": # pragma: no cover
-    main()
