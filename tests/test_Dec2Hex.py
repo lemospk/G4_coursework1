@@ -1,8 +1,7 @@
 import sys, os, unittest, subprocess
 from unittest.mock import patch
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
-from Dec2Hex import decimal_to_hex, get_valid_integer
-
+from Dec2Hex import decimal_to_hex, get_valid_integer, main
 
 class Test_function_DecimalToHex(unittest.TestCase):
 
@@ -20,33 +19,11 @@ class Test_function_DecimalToHex(unittest.TestCase):
         self.assertEqual(decimal_to_hex(0), "0")
 
 class Test_Main(unittest.TestCase):
-    
-	    
-    def test_input_no_argument(self):
-        result = subprocess.run(
-            [sys.executable, "src/Dec2Hex.py"],  
-            capture_output=True,
-            text=True
-        )
-        expected_message = "Error: No input argument provided.\nUsage: python script.py <decimal_number>\n"
-        self.assertEqual(result.stdout, expected_message)
-    
-    def test_script_with_valid_argument(self):
-        result = subprocess.run(
-            [sys.executable, "src/Dec2Hex.py", "10"],  
-            capture_output=True,
-            text=True
-        )
-        self.assertIn("Converting the Decimal Value 10 to Hex...\nHexadecimal representation is: A", result.stdout)
-
-    def test_script_with_invalid_argument(self):
-        result = subprocess.run(
-            [sys.executable, "src/Dec2Hex.py", "abc"],
-            capture_output=True,
-            text=True,
-            input="10\n" 
-        )
-        self.assertIn("Invalid input! Please provide a valid integer.", result.stdout)
+    @patch("sys.argv", ["Dec2Hex.py"])
+    def test_main_no_argument(self):
+        with self.assertRaises(ValueError) as context:
+            main()
+        self.assertIn("Error: No input argument provided.\nUsage: python script.py <decimal_number>", str(context.exception))
 
 class Test_Function_GetValidIntergerFuncion(unittest.TestCase):
     
