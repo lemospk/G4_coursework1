@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as ET
 
-tree = ET.parse("coverage.xml")
+tree = ET.parse("tests/coverage.xml")
 root = tree.getroot()
 
 new_root = ET.Element("coverage", version="1")
@@ -17,4 +17,4 @@ for package in root.findall(".//package"):
             ET.SubElement(file_element, "lineToCover", lineNumber=line_number, covered=covered)
 
 tree = ET.ElementTree(new_root)
-tree.write("sonar-coverage.xml")
+tree.write("tests/sonar-coverage.xml")
